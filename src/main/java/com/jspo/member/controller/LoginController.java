@@ -2,6 +2,7 @@ package com.jspo.member.controller;
 
 import com.jspo.member.dao.MemberDao;
 import com.jspo.member.dto.MemberDto;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,8 +36,7 @@ public class LoginController {
         if(result != null) {
             // 결과값이 널이 아니면 즉 select가 정상적으로 되었음
             // 메인 홈으로 가기
-            m.addAttribute("memberDto", result);
-            return "myPage";
+            return "test";
         } else {
             // 로그인 실패시 로그인 페이지에 머무르며
             // 에러메시지를 띄운다
