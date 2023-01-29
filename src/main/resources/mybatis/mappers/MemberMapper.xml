@@ -15,7 +15,7 @@
     </select>
 
     <select id="selectMemberByEmail" parameterType="String" resultType="MemberDto">
-        select * from member where email = #{String};
+        select * from member where email = #{email};
     </select>
 
 <!--    이메일 중복확인-->
@@ -27,5 +27,10 @@
     <select id="login" parameterType="MemberDto" resultType="MemberDto">
         SELECT * FROM member
         WHERE email = #{email} AND pwd = #{pwd};
+    </select>
+
+<!--    전화번호 중복 조회-->
+    <select id="memberPhoneCount" parameterType="String" resultType="Integer">
+        select count(*) from member where phone = #{phone};
     </select>
 </mapper>

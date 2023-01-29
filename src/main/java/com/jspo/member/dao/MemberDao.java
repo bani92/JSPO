@@ -21,4 +21,6 @@ public interface MemberDao {
 
     MemberDto selectMemberByEmail (String email) throws Exception;
 
+    Integer memberPhoneCount(String phone) throws Exception;
+
 }

@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<form th:action="@{/join}" method="post" name="regForm"><!--modelAttribute="memberDto"--> >
+<form th:action="@{/join}" method="post" name="regForm"><!--modelAttribute="memberDto"-->
     <div class="wrap">
 
         <div class="join__area">
@@ -62,6 +62,8 @@
             <div class="input__box">
                 <h3 class="input__title">연락처*</h3>
                 <input type="text" class="input__txt" id="phone" name="phone" th:value="${memberDto.phone}" placeholder=" - 없이 숫자만 입력" oninput="checkPhone()">
+                <input type="text" id="phoneAuthNum" oninput="checkPhoneAuthNum()">
+                <span id="phoneAuthBtn" disabled="disabled" onclick="sendPhoneAuthNum()">인증번호 전송</span>
                 <span id="valid_phone" th:text="${valid_phone}"></span>
             </div>
 
@@ -78,7 +80,6 @@
     let nameCheck;
     let birthCheck;
     let phoneCheck;
-    let inputNum;
     let authNumCheck;
 
     // 윈도우가 로드될 때(회원가입시 오류 발생하여 다시 회원가입폼으로 돌아올 경우) 저장된 값을 인식하게하기 위함.
@@ -88,7 +89,6 @@
         checkName();
         checkBirth();
         checkPhone();
-        checkAuthNum();
         allCheck();
     }
 
@@ -194,11 +194,14 @@
 
     // 사용자가 전화번호를 입력했는지 확인.
     function checkPhone() {
-        if($("#phone").val() !== "") {
+        if($("#phone").val() !== "" && $("#phone").val().length === 11) {
             $("#valid_phone").css("display", "none");
-            phoneCheck = true;
+            $("#phoneAuthBtn").prop("disabled", false);
+            $("#phoneAuthBtn").css("background-color", "#4CAF50");
         } else {
             $("#valid_phone").css("display", "inline-block");
+            $("#phoneAuthBtn").prop("disabled", true);
+            $("#phoneAuthBtn").css("background-color", "#ebebeb");
             phoneCheck = false;
         }
         allCheck();
@@ -216,7 +219,7 @@
 
     // 서버에 저장된 인증번호와 사용자가 입력한 값이 맞는지 확인.
     function checkAuthNum() {
-        inputNum = $("#authNum").val();
+        let inputNum = $("#authNum").val();
 
         $.ajax({
             url: "join/emailAuth",
@@ -233,6 +236,42 @@
                 allCheck();
             }
         })
+    }
+
+    // 핸드폰 인증번호 서버에 저장.
+    function sendPhoneAuthNum() {
+        let phone = $("#phone").val();
+
+        if (phone.length !== 11) {
+            return;
+        }
+        alert("gogo");
+        $.ajax({
+            url: "/phoneAuth",
+            method: "post",
+            data: {phone : phone}
+        })
+    }
+
+    function checkPhoneAuthNum() {
+        let inputNum = $("#phoneAuthNum").val();
+
+        if (inputNum.length === 6) {
+            $.ajax({
+                url: "/phoneAuthOk",
+                method: "post",
+                data: {inputNum : inputNum},
+                success: function(res) {
+                    if (res === true) {
+                        $("#phoneAuthNum").css("background-color", "#4CAF50");
+                        phoneCheck = true;
+                    } else {
+                        $("#phoneAuthNum").css("background-color", "#ebebeb");
+                    }
+                }
+            })
+        }
+        return;
     }
 
     // 모든 input 항목을 적었는지 확인하고, 다 입력하면 가입버튼 활성화, 아니면 비활성화.
