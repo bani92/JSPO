@@ -1,0 +1,110 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.container{
+    width: 1280px;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 40px 160px;
+}
+
+.title__titleLine{
+    font-size: 24px;
+    padding: 5px 0 16px;
+    text-align: left;
+    border-bottom: 3px solid black;
+
+}
+
+h3{
+    margin: 0;
+
+}
+
+.profile__info{
+    padding: 58px 0 0 ;
+    width: 480px;
+    height: 865px;
+}
+
+.info__group__title{
+    font-size: 18px;
+    margin: 0;
+    text-align: left;
+}
+
+.info__unit{
+
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+
+}
+.unit__content{
+    width: 100%;
+    padding: 25px 0px 18px;
+    border-bottom: 1px solid #ebebeb ;
+
+}
+
+.include_btn{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title{
+    margin: 0px;
+    color: #9a9998;
+}
+
+.desc{
+    margin: 0px;
+    color: #9a9998;
+}
+
+.changeBtn{
+    width: 50px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid #ebebeb;
+    border-radius: 10px;
+}
+
+.info__person{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 58px 0 0 ;
+}
+
+.secession{
+    margin-top: 40px;
+}
+
+.secession button{
+    border: none;
+    background-color: white;
+    font-size: 12px;
+    color: #9a9998;
+    text-decoration: underline;
+    padding: 0px;
+}
+
+.noneColor{
+    color: black;
+}

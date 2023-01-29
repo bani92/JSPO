@@ -5,7 +5,6 @@ import com.jspo.member.dto.MemberDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +31,7 @@ public class JoinController {
     }
 
     @PostMapping("/join")
-    public String join(@Valid MemberDto joinMember, Errors errors, String pwd2, Model m) throws Exception {
+    public String join(@Valid MemberDto joinMember, Errors errors, Model m) throws Exception {
 
 //        post 요청시 넘어온 joinMember 입력값에서 validation에 걸리는 경우
         if (errors.hasErrors()) {
@@ -61,18 +60,12 @@ public class JoinController {
             return "regForm";
         }
 
-//        memberDto.setEmail(joinMember.getEmail());
-//        memberDto.setPwd(joinMember.getPwd());
-//        memberDto.setName(joinMember.getName());
-//        memberDto.setBirth(joinMember.getBirth());
-//        memberDto.setPhone(joinMember.getPhone());
-
 //        DB에 등록한 회원 저장.
         memberDao.insertMember(joinMember);
         m.addAttribute("memberDto", joinMember);
         System.out.println("join 성공");
 
-        return "test";
+        return "myPage";
     }
 
     @PostMapping("/emailCheck")
