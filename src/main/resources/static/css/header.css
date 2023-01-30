@@ -1,0 +1,47 @@
+* {
+    box-sizing: border-box
+}
+
+body {
+
+}
+.container{
+    display: flex;
+    flex-direction: column;
+}
+.top__inner {
+    text-align: right;
+}
+
+.top__list {
+    list-style: none;
+    /*text-align: right;*/
+    float: right;
+}
+
+.top__list li {
+
+    margin-left: 20px;
+    padding: 0px 20px 0;
+    float: left;
+
+}
+
+.listBorder{
+    border-left: 1px solid #9a9998;
+
+}
+
+a {
+    color: black;
+    text-decoration: none;
+
+}
+
+.main__inner{
+    border-bottom: 1px solid #ebebeb;
+}
+
+.logo {
+    width: 200px;
+}
